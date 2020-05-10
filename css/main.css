@@ -1,0 +1,15 @@
+* {
+    background-color: rgb(72, 255, 240);
+}
+
+body {
+    position: center;
+    justify-self: center;
+    margin: auto;
+    display: flexbox;
+    padding: 1em;
+}
+
+#secret-word {
+    background-color: bisque;
+}

@@ -4,23 +4,34 @@ const easyWords = ["apple", "baloon", "circle", "beard", "sweet"];
 const medWords = ["garbage", "computer", "mattress"];
 const hardWords = ["javascript", "photograph", "neighborhood", "dashboard", "pharmacist"];
 
+const imageLookup = {
+    "default" :
+    "first" :
+    "second" :
+    "third" :
+    "fourth" :
+    "fifth" :
+};
+
 
 /*==>==>==>==> APP STATE (VARIABLES) ==>==>==>==>*/
 let secretWord; 
 let score; 
 let timeLeft;  
 let chancesLeft;
-let correctGuesses
+let correctGuesses;
 //maybe let remainingLetters;
 
 
 /*==>==>==>==> CACHED ELEMENTS REFERENCES ==>==>==>==>*/
-let titleEL = document.getElementById("title");
+const titleEL = document.getElementById("title");
 const easybtnEl = document.getElementById("easybtn");
 const medbtnEl = document.getElementById("mediumbtn");
 const hardbtnEl = document.getElementById("hardbtn");
-const rstBtn = document.getElementById("resetbtn");
+const rstBtnEl = document.getElementById("resetbtn");
 const letterBtnsElm = document.getElementById("letters-div");
+const secretWordEl = document.getElementById("secret-word");
+const imageEl = document.getElementById("image");
 //Maybe not byclassname but queryselector
 
 
@@ -38,10 +49,11 @@ hardbtnEl.addEventListener("click", () => {
 
 letterBtnsElm.addEventListener("click", function(evt) {
     checkLetter();
+
 })
 
 
-rstBtn.addEventListener ("click", () => {
+rstBtnEl.addEventListener ("click", () => {
     init();
 });
 
@@ -49,12 +61,18 @@ rstBtn.addEventListener ("click", () => {
 /*==>==>==>==> FUNCTIONS ==>==>==>==>*/
 init();
 function init(){
-    //resets the game
+    //sets secret word display to none
+    secretWordEl.innerText = "";
+    //set score to 0
+    score = 0;
+    //diplay image to none
+    imageEl.innerText = imageLookup[]
+    //set secret word to ""
 };
 function selectWord(){
     //check which difficulty btn was clicked
     //select ranmdomly from respective array
-    //
+    //displays on secret word html div
 };
 
 function checkLetter(){
