@@ -14,18 +14,14 @@ const imageLookup = {
     "fifth" : "",
 };
 
-
 /*==>==>==>==> APP STATE (VARIABLES) ==>==>==>==>*/
-let secretWord; //needs to be a string??
+let secretWord; //needs to be a string
 let score; 
 let timeLeft;  
 let chancesLeft;
 let correctGuesses;
 let answerArr;
 let isWinner;
-let hiddenWord;
-//maybe let remainingLetters;???
-
 
 /*==>==>==>==> CACHED ELEMENTS REFERENCES ==>==>==>==>*/
 const titleEL = document.getElementById("title");
@@ -38,10 +34,30 @@ const secretWordEl = document.getElementById("secret-word");
 const imageEl = document.getElementById("image");
 const wrongGuessessEl = document.getElementById("wrong-guesses");
 const chancesLeftEl = document.getElementById("chances-left");
+//add const difBtnsEl = document.getElementById("difbuttons");
+
+//Maybe something like:
+//const difBtnEls = {
+//     "easy" : easybtnEl,
+//     "medium" : medbtnEl,
+//     "hard" : hardbtnEl
+
+// }
 
 
 
 /*==>==>==>==> EVENT LISTENERS ==>==>==>==>*/
+
+// Then here:
+
+// difBtnsEl.addEventListener("click", (evt) => {
+//     secretWord = difBtnsEl[evt.target.innerText.toLowerCase][Math.floor(Math.random() * difBtnsEl[evt.target.innerText.toLowerCase].length)];
+//     setWordUp();
+// });
+
+
+
+
 easybtnEl.addEventListener("click", () => {
     secretWord = easyWords[Math.floor(Math.random() * easyWords.length)];
     setWordUp();
@@ -89,11 +105,11 @@ function setWordUp(){
 };
 
 function checkLetter(){
-    //1- get evt.target.innerText, uppercase it(also put it in a variable????)
-    //2- CONDITIONAL -- check to see if evt.target.innerText is included in secret word
+    //1- get evt.target.innerText.toUppercase (also put it in a variable????)
+    //2- CONDITIONAL -- check to see if evt.target.innerText.toUppercase is included in answerArr
     //3- if true:
-    // * substitute correct letter at correct index of answerArr
-    // * display letter
+    // * Get the index of letter in answerArr
+    // * display correct letter at correct index of answerArr
     //4- If false:
     //(On chancesLeft:)
     // * subtract 1 from chancesLeft
@@ -128,6 +144,6 @@ function render(){
 
 };
 
-// function confetti(){
+function confetti(){
 
-// };
+};
