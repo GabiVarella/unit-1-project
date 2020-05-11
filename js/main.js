@@ -22,6 +22,7 @@ let chancesLeft;
 let correctGuesses;
 let answerArr;
 let isWinner;
+let wrongGuesses;
 
 /*==>==>==>==> CACHED ELEMENTS REFERENCES ==>==>==>==>*/
 const titleEL = document.getElementById("title");
@@ -32,7 +33,7 @@ const rstBtnEl = document.getElementById("resetbtn");
 const letterBtnsElm = document.getElementById("letters-div");
 const secretWordEl = document.getElementById("secret-word");
 const imageEl = document.getElementById("image");
-const wrongGuessessEl = document.getElementById("wrong-guesses");
+const wrongGuessesEl = document.getElementById("wrong-guesses");
 const chancesLeftEl = document.getElementById("chances-left");
 //add const difBtnsEl = document.getElementById("difbuttons");
 
@@ -65,14 +66,12 @@ easybtnEl.addEventListener("click", () => {
 });
 
 medbtnEl.addEventListener("click", () => {
-    //Picks a word from mediumWords array
     secretWord = medWords[Math.floor(Math.random() * medWords.length)];
     setWordUp();
 
 });
 
 hardbtnEl.addEventListener("click", () => {
-    //Picks a word from hardWords array
     secretWord = hardWords[Math.floor(Math.random() * hardWords.length)];
     setWordUp();
 
@@ -93,10 +92,13 @@ rstBtnEl.addEventListener ("click", () => {
 init();
 function init(){
     score = 0;
+    chancesLeft = 3;
+    wrongGuesses = [];
+    wrongGuessesEl.innerText = "";
+    chancesLeftEl.innerText = chancesLeft;
+    secretWordEl.innerText = "";
     imageEl.innerText = imageLookup["default"];
-    secretWord = "";
     isWinner = false;
-
 };
 
 function setWordUp(){
@@ -109,38 +111,39 @@ function setWordUp(){
 };
 
 function checkLetter(letter){
-    for (let j=0; j<secretWord.length; j++){
-        if (secretWord[j] === letter) {
-            answerArr[j] = letter;
-            render();
+    if (isWinner || chancesLeft === 0){
+        return;
+    };
+    if (secretWord.includes(letter)) {
+        for (let j=0; j<secretWord.length; j++){
+            if (secretWord[j] === letter) {
+                answerArr[j] = letter;
+            }
         }
+    } else {
+        chancesLeft -= 1;
+        wrongGuesses.push(letter);
+        chancesLeftEl.innerText = chancesLeft;
+        wrongGuessesEl.innerText = wrongGuesses;
+        // * Access and display correspondent img from imageLookup obj
     }
-            //create a elem, give it a class and id
-           
-         //3- if true:
-    // * Get the index of letter in answerArr
-        //console.log("if statement works")
-    // * display correct letter at correct index of answerArr
-    
-   
-    //4- If false:
-    //(On chancesLeft:)
-    // * subtract 1 from chancesLeft
-    // * Display number of chances left on "chances-left" HTML div
-    // * Dispay in HTML wrong-choice div the wrong letter chosen
-    // * Access and display correspondent img from imageLookup obj
-    //5- checkWinner();
-    //6- render();
+        checkWinner();
+        render();
 };
 
 function checkWinner(){
-    if (answerArr.includes("_")) {
+    if (chancesLeft === 0) {
+        titleEL.innerText = "Oh Dang it!! You lose!";
+    }
+    else if (answerArr.includes("_")) {
         return;
     }
     else {
-        winner = true;
+        isWinner = true;
         titleEL.innerText = "Congratulations, you WIN!!";
+
         //play confetti();
+        //disallow clicking on the letters or difBtn
     }
     
 
@@ -148,6 +151,8 @@ function checkWinner(){
 
 function render(){
     secretWordEl.innerText = answerArr;
+
+
     //if (winner === true) 
     //display selecWord() choice to secret-word HTML elem
     //update the secret-word HTML elem

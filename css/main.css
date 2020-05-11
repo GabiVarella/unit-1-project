@@ -1,5 +1,5 @@
 * {
-    background-color: rgb(72, 255, 240);
+    background-color: rgb(195, 248, 245);
 }
 
 body {
@@ -9,6 +9,19 @@ body {
     display: flexbox;
     padding: 1em;
 }
+h1 {
+    font-size: 58px;
+}
+
+.maincontent {
+    margin: 18px 18px;
+}
+#difbuttons {
+    margin: 18px 18px;
+    color: sandybrown;
+    font-size: 18px;
+
+}
 
 #secret-word {
     background-color: lightsalmon;
@@ -16,10 +29,28 @@ body {
 }
 
 .letters {
-    background-color: rgba(128, 255, 0, 0.562);
+    background-color: #f08080;
+    font-size: 22px;
+    margin: 10px;
+    ;
 }
 
 #secret-word {
     font-size: 36px;
     letter-spacing: 10px;
+}
+
+#wrong-guesses {
+    font-size: 28px;
+    letter-spacing: 10px;
+
+
+}
+#chances-left {
+    font-size: 28px;
+
+}
+
+#resetbtn {
+    font-size: 18px;
 }
