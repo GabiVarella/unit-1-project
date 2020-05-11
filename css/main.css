@@ -11,5 +11,15 @@ body {
 }
 
 #secret-word {
-    background-color: bisque;
+    background-color: lightsalmon;
+
+}
+
+.letters {
+    background-color: rgba(128, 255, 0, 0.562);
+}
+
+#secret-word {
+    font-size: 36px;
+    letter-spacing: 10px;
 }

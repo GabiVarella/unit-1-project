@@ -22,7 +22,9 @@ let timeLeft;
 let chancesLeft;
 let correctGuesses;
 let answerArr;
-//maybe let remainingLetters;
+let isWinner;
+let hiddenWord;
+//maybe let remainingLetters;???
 
 
 /*==>==>==>==> CACHED ELEMENTS REFERENCES ==>==>==>==>*/
@@ -34,28 +36,34 @@ const rstBtnEl = document.getElementById("resetbtn");
 const letterBtnsElm = document.getElementById("letters-div");
 const secretWordEl = document.getElementById("secret-word");
 const imageEl = document.getElementById("image");
-const wrongChoicesEl = document.getElementById("wrong-choices");
-const choicesLeftEl = document.getElementById("chances-left");
-//Maybe not byclassname but queryselector
+const wrongGuessessEl = document.getElementById("wrong-guesses");
+const chancesLeftEl = document.getElementById("chances-left");
+
 
 
 /*==>==>==>==> EVENT LISTENERS ==>==>==>==>*/
 easybtnEl.addEventListener("click", () => {
-    //renders the game EASY mode
-});
-medbtnEl.addEventListener("click", () => {
-    //renders the game MEDIUM mode
-});
-hardbtnEl.addEventListener("click", () => {
-    //renders the game HARD mode
+    secretWord = easyWords[Math.floor(Math.random() * easyWords.length)];
+    setWordUp();
 });
 
+medbtnEl.addEventListener("click", () => {
+    //Picks a word from mediumWords array
+    secretWord = medWords[Math.floor(Math.random() * medWords.length)];
+    setWordUp();
+});
+
+hardbtnEl.addEventListener("click", () => {
+    //Picks a word from hardWords array
+    secretWord = hardWords[Math.floor(Math.random() * hardWords.length)];
+    setWordUp();
+
+});
 
 letterBtnsElm.addEventListener("click", function(evt) {
     checkLetter();
 
 })
-
 
 rstBtnEl.addEventListener ("click", () => {
     init();
@@ -65,43 +73,52 @@ rstBtnEl.addEventListener ("click", () => {
 /*==>==>==>==> FUNCTIONS ==>==>==>==>*/
 init();
 function init(){
-    //sets secret word display to none
     secretWordEl.innerText = "";
-    //set score to 0
     score = 0;
-    //diplay image to none
     imageEl.innerText = imageLookup["default"];
-    //set secret word to ""
     secretWord = "";
+    isWinner = false;
 };
-function selectWord(){
-    //check which difficulty btn was clicked
-    //select randomly from chosen dificulty array
-    //secretWord = difArrayclickeds[Math.floor(Math.random() * difArrayclickeds.length)];
-    //let answerArr = secretWord.split(''); into an array of letters
-    //turn answerArr into "_" by answer.forEach((element) => {answer.element = "_";
-    //});
-    
+
+function setWordUp(){
+    answerArr = secretWord.split(""); //fix spacing between elm in arrary
+    for (var i = 0; i < answerArr.length; i++) {
+        answerArr[i] = "_";
+       }
+    secretWordEl.innerText = answerArr;
 };
 
 function checkLetter(){
     //1- get evt.target.innerText, uppercase it(also put it in a variable????)
     //2- CONDITIONAL -- check to see if evt.target.innerText is included in secret word
     //3- if true:
+    // * substitute correct letter at correct index of answerArr
     // * display letter
     //4- If false:
+    //(On chancesLeft:)
     // * subtract 1 from chancesLeft
-    // * Display chances left on chances-left HTML div
-    // * Dispay in HTML wrong-choice div
+    // * Display number of chances left on "chances-left" HTML div
+    // * Dispay in HTML wrong-choice div the wrong letter chosen
     // * Access and display correspondent img from imageLookup obj
-    //render();
+    //5- checkWinner();
+    //6- render();
 };
 
 function checkWinner(){
-    //returns win/lose logic
+    if (answerArr.includes("_")) {
+        return;
+    }
+    else {
+        winner = true;
+        titleEL.innerText = "Congratulations, you WIN!!";
+        //play confetti();
+    }
+    
+
 };
 
 function render(){
+    //if (winner === true) 
     //display selecWord() choice to secret-word HTML elem
     //update the secret-word HTML elem
     //update wrong-guesses HTML elem
@@ -111,3 +128,6 @@ function render(){
 
 };
 
+// function confetti(){
+
+// };
