@@ -15,7 +15,7 @@ const imageLookup = {
 };
 
 /*==>==>==>==> APP STATE (VARIABLES) ==>==>==>==>*/
-let secretWord; //needs to be a string
+let secretWord;
 let score; 
 let timeLeft;  
 let chancesLeft;
@@ -61,12 +61,14 @@ const chancesLeftEl = document.getElementById("chances-left");
 easybtnEl.addEventListener("click", () => {
     secretWord = easyWords[Math.floor(Math.random() * easyWords.length)];
     setWordUp();
+
 });
 
 medbtnEl.addEventListener("click", () => {
     //Picks a word from mediumWords array
     secretWord = medWords[Math.floor(Math.random() * medWords.length)];
     setWordUp();
+
 });
 
 hardbtnEl.addEventListener("click", () => {
@@ -74,10 +76,11 @@ hardbtnEl.addEventListener("click", () => {
     secretWord = hardWords[Math.floor(Math.random() * hardWords.length)];
     setWordUp();
 
+
 });
 
 letterBtnsElm.addEventListener("click", function(evt) {
-    checkLetter();
+    checkLetter(evt.target.innerText.toLowerCase());
 
 })
 
@@ -89,27 +92,37 @@ rstBtnEl.addEventListener ("click", () => {
 /*==>==>==>==> FUNCTIONS ==>==>==>==>*/
 init();
 function init(){
-    secretWordEl.innerText = "";
     score = 0;
     imageEl.innerText = imageLookup["default"];
     secretWord = "";
     isWinner = false;
+
 };
 
 function setWordUp(){
     answerArr = secretWord.split(""); //fix spacing between elm in arrary
     for (var i = 0; i < answerArr.length; i++) {
         answerArr[i] = "_";
+        //create a elem, give it a class and id
        }
     secretWordEl.innerText = answerArr;
 };
 
-function checkLetter(){
-    //1- get evt.target.innerText.toUppercase (also put it in a variable????)
-    //2- CONDITIONAL -- check to see if evt.target.innerText.toUppercase is included in answerArr
-    //3- if true:
+function checkLetter(letter){
+    for (let j=0; j<secretWord.length; j++){
+        if (secretWord[j] === letter) {
+            answerArr[j] = letter;
+            render();
+        }
+    }
+            //create a elem, give it a class and id
+           
+         //3- if true:
     // * Get the index of letter in answerArr
+        //console.log("if statement works")
     // * display correct letter at correct index of answerArr
+    
+   
     //4- If false:
     //(On chancesLeft:)
     // * subtract 1 from chancesLeft
@@ -134,6 +147,7 @@ function checkWinner(){
 };
 
 function render(){
+    secretWordEl.innerText = answerArr;
     //if (winner === true) 
     //display selecWord() choice to secret-word HTML elem
     //update the secret-word HTML elem
@@ -144,6 +158,6 @@ function render(){
 
 };
 
-function confetti(){
+// function confetti(){
 
-};
+// };
