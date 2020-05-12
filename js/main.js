@@ -1,3 +1,4 @@
+//====================================//
 /*==>==>==>==> CONSTANTS ==>==>==>==>*/
 
 const easyWords = ["apple", "baloon", "circle", "beard", "sweet"];
@@ -13,7 +14,7 @@ const imageLookup = {
     "fourth" : "",
     "fifth" : "",
 };
-
+//================================================//
 /*==>==>==>==> APP STATE (VARIABLES) ==>==>==>==>*/
 let secretWord;
 let score; 
@@ -24,6 +25,7 @@ let answerArr;
 let isWinner;
 let wrongGuesses;
 
+//=====================================================//
 /*==>==>==>==> CACHED ELEMENTS REFERENCES ==>==>==>==>*/
 const titleEL = document.getElementById("title");
 const easybtnEl = document.getElementById("easybtn");
@@ -35,6 +37,7 @@ const secretWordEl = document.getElementById("secret-word");
 const imageEl = document.getElementById("image");
 const wrongGuessesEl = document.getElementById("wrong-guesses");
 const chancesLeftEl = document.getElementById("chances-left");
+const msgEl = document.getElementById("msg");
 //add const difBtnsEl = document.getElementById("difbuttons");
 
 //Maybe something like:
@@ -45,69 +48,72 @@ const chancesLeftEl = document.getElementById("chances-left");
 
 // }
 
-
-
+//=========================================//
 /*==>==>==>==> EVENT LISTENERS ==>==>==>==>*/
 
 // Then here:
-
 // difBtnsEl.addEventListener("click", (evt) => {
 //     secretWord = difBtnsEl[evt.target.innerText.toLowerCase][Math.floor(Math.random() * difBtnsEl[evt.target.innerText.toLowerCase].length)];
 //     setWordUp();
 // });
 
-
-
-
 easybtnEl.addEventListener("click", () => {
-    secretWord = easyWords[Math.floor(Math.random() * easyWords.length)];
-    setWordUp();
+    if (isWinner === false) {
+        secretWord = easyWords[Math.floor(Math.random() * easyWords.length)];
+        setWordUp();
+    }
+   
 
 });
 
 medbtnEl.addEventListener("click", () => {
-    secretWord = medWords[Math.floor(Math.random() * medWords.length)];
+    if (isWinner === false) {
+        secretWord = medWords[Math.floor(Math.random() * medWords.length)];
     setWordUp();
 
+    }
 });
 
 hardbtnEl.addEventListener("click", () => {
-    secretWord = hardWords[Math.floor(Math.random() * hardWords.length)];
+    if (isWinner === false) {
+        secretWord = hardWords[Math.floor(Math.random() * hardWords.length)];
     setWordUp();
+    }
 
 
 });
 
 letterBtnsElm.addEventListener("click", function(evt) {
+    if (evt.target.className !== "letters" || wrongGuesses.includes(evt.target.innerText.toLowerCase())){
+        return;
+    }
     checkLetter(evt.target.innerText.toLowerCase());
 
 })
 
-rstBtnEl.addEventListener ("click", () => {
-    init();
-});
-
-
+rstBtnEl.addEventListener ("click", () => init());
+//====================================//    
 /*==>==>==>==> FUNCTIONS ==>==>==>==>*/
 init();
 function init(){
     score = 0;
     chancesLeft = 3;
     wrongGuesses = [];
+    isWinner = false;
     wrongGuessesEl.innerText = "";
     chancesLeftEl.innerText = chancesLeft;
     secretWordEl.innerText = "";
     imageEl.innerText = imageLookup["default"];
-    isWinner = false;
+    msgEl.innerText = "";
+    
 };
 
 function setWordUp(){
-    answerArr = secretWord.split(""); //fix spacing between elm in arrary
+    answerArr = secretWord.split(""); 
     for (var i = 0; i < answerArr.length; i++) {
-        answerArr[i] = "_";
-        //create a elem, give it a class and id
+        answerArr[i] = "?";
        }
-    secretWordEl.innerText = answerArr;
+    secretWordEl.innerText = answerArr.join(" ");
 };
 
 function checkLetter(letter){
@@ -124,7 +130,7 @@ function checkLetter(letter){
         chancesLeft -= 1;
         wrongGuesses.push(letter);
         chancesLeftEl.innerText = chancesLeft;
-        wrongGuessesEl.innerText = wrongGuesses;
+        wrongGuessesEl.innerText = wrongGuesses.join(" ").toUpperCase();
         // * Access and display correspondent img from imageLookup obj
     }
         checkWinner();
@@ -133,26 +139,20 @@ function checkLetter(letter){
 
 function checkWinner(){
     if (chancesLeft === 0) {
-        titleEL.innerText = "Oh Dang it!! You lose!";
+        msgEl.innerText = "Wipeout!! You lose! Try Again";
     }
-    else if (answerArr.includes("_")) {
+    else if (answerArr.includes("?")) {
         return;
     }
     else {
         isWinner = true;
-        titleEL.innerText = "Congratulations, you WIN!!";
-
-        //play confetti();
-        //disallow clicking on the letters or difBtn
+        msgEl.innerText = "Congratulations, you WIN!!";
+        //confetti.start(1500);
     }
-    
-
 };
 
 function render(){
-    secretWordEl.innerText = answerArr;
-
-
+    secretWordEl.innerText = answerArr.join(" ").toUpperCase();
     //if (winner === true) 
     //display selecWord() choice to secret-word HTML elem
     //update the secret-word HTML elem
@@ -160,9 +160,6 @@ function render(){
     //update chances-left HTML elem
     //update score
     //update time left
-
 };
 
-// function confetti(){
 
-// };

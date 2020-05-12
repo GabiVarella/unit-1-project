@@ -11,15 +11,26 @@ body {
 }
 h1 {
     font-size: 58px;
+    display: flex;
+    position: center;
+}
+
+h2 {
+    font-size: 64px;
 }
 
 .maincontent {
     margin: 18px 18px;
 }
-#difbuttons {
-    margin: 18px 18px;
-    color: sandybrown;
-    font-size: 18px;
+.db {
+    background-color: salmon;
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
 
 }
 
@@ -36,13 +47,13 @@ h1 {
 }
 
 #secret-word {
-    font-size: 36px;
-    letter-spacing: 10px;
+    font-size: 46px;
+    letter-spacing: 20px;
 }
 
 #wrong-guesses {
-    font-size: 28px;
-    letter-spacing: 10px;
+    font-size: 32px;
+    letter-spacing: 20px;
 
 
 }
@@ -52,5 +63,13 @@ h1 {
 }
 
 #resetbtn {
-    font-size: 18px;
-}
+
+        background-color: salmon;
+        border: none;
+        color: black;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+      }

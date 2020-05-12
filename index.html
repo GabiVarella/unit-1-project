@@ -6,16 +6,19 @@
     <title>Hang Loose Man</title>
     <link rel="stylesheet" href="css/main.css">
     <script defer src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/mathusummut/confetti.js/confetti.min.js"></script>
+
 </head>
 
 <body>
 
     <h1 id="title">Hang Loose Man</h1>
+    <h2 id="msg"></h2>
 
     <div id="difbuttons">
-        <button id="easybtn">Easy</button>
-        <button id="mediumbtn">Medium</button>
-        <button id="hardbtn">Hard</button>
+        <button id="easybtn" class="db">Easy</button>
+        <button id="mediumbtn" class="db">Medium</button>
+        <button id="hardbtn" class="db">Hard</button>
     </div>
 
     <main class="maincontent">
@@ -60,6 +63,5 @@
     <div id="wrong-guesses"></div>
 
     <button id="resetbtn">RESET</button>
-
 </body>
 </html>
