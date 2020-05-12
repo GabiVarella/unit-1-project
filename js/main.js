@@ -38,10 +38,11 @@ const imageEl = document.getElementById("image");
 const wrongGuessesEl = document.getElementById("wrong-guesses");
 const chancesLeftEl = document.getElementById("chances-left");
 const msgEl = document.getElementById("msg");
-//add const difBtnsEl = document.getElementById("difbuttons");
+const timerEl = document.getElementById("timer");
+const difBtnsEl = document.getElementById("difbuttons");
 
 //Maybe something like:
-//const difBtnEls = {
+// const difBtnEls = {
 //     "easy" : easybtnEl,
 //     "medium" : medbtnEl,
 //     "hard" : hardbtnEl
@@ -60,7 +61,7 @@ const msgEl = document.getElementById("msg");
 easybtnEl.addEventListener("click", () => {
     if (isWinner === false) {
         secretWord = easyWords[Math.floor(Math.random() * easyWords.length)];
-        setWordUp();
+    setWordUp();
     }
    
 
@@ -105,8 +106,13 @@ function init(){
     secretWordEl.innerText = "";
     imageEl.innerText = imageLookup["default"];
     msgEl.innerText = "";
+    difBtnsEl.style.display = "";
+    //timerEl.innerText = "";
+    //clearInterval(timer); --- did not work
     
 };
+
+//var timer = 
 
 function setWordUp(){
     answerArr = secretWord.split(""); 
@@ -114,6 +120,19 @@ function setWordUp(){
         answerArr[i] = "?";
        }
     secretWordEl.innerText = answerArr.join(" ");
+    difBtnsEl.style.display = "none";
+
+    // timeLeft = 60;
+    // // Maybe not here?? --- func espres or declar??
+    // let timer = setInterval(function() {
+    //     timerEl.textContent = timeLeft + ' seconds remaining.';
+    //     timeLeft -= 1;
+    //     if (timeLeft < 0) {
+    //         timerEl.textContent = "Time's Up Dudes!"
+    //     }
+    
+    // }, 1000)
+
 };
 
 function checkLetter(letter){
