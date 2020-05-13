@@ -19,8 +19,9 @@ const imageLookup = {
 let secretWord;
 let score; 
 let timeLeft;  
+let timerInterval;
 let chancesLeft;
-let correctGuesses;
+let letterClicked;  //Added this for making wrong guess btn a different color
 let answerArr;
 let isWinner;
 let wrongGuesses;
@@ -33,6 +34,8 @@ const medbtnEl = document.getElementById("mediumbtn");
 const hardbtnEl = document.getElementById("hardbtn");
 const rstBtnEl = document.getElementById("resetbtn");
 const letterBtnsElm = document.getElementById("letters-div");
+
+const eachLetterEl = document.querySelectorAll(".letters");
 const secretWordEl = document.getElementById("secret-word");
 const imageEl = document.getElementById("image");
 const wrongGuessesEl = document.getElementById("wrong-guesses");
@@ -40,6 +43,7 @@ const chancesLeftEl = document.getElementById("chances-left");
 const msgEl = document.getElementById("msg");
 const timerEl = document.getElementById("timer");
 const difBtnsEl = document.getElementById("difbuttons");
+const imgMsgEl = document.getElementById("img-message");
 
 //Maybe something like:
 // const difBtnEls = {
@@ -88,11 +92,12 @@ letterBtnsElm.addEventListener("click", function(evt) {
     if (evt.target.className !== "letters" || wrongGuesses.includes(evt.target.innerText.toLowerCase())){
         return;
     }
+    letterClicked = evt.target; //Added this for making wrong guess btn a different color
     checkLetter(evt.target.innerText.toLowerCase());
 
 })
 
-rstBtnEl.addEventListener ("click", () => init());
+rstBtnEl.addEventListener ("click", init);
 //====================================//    
 /*==>==>==>==> FUNCTIONS ==>==>==>==>*/
 init();
@@ -102,13 +107,19 @@ function init(){
     wrongGuesses = [];
     isWinner = false;
     wrongGuessesEl.innerText = "";
-    chancesLeftEl.innerText = chancesLeft;
+    chancesLeftEl.innerText = "";
     secretWordEl.innerText = "";
-    imageEl.innerText = imageLookup["default"];
     msgEl.innerText = "";
     difBtnsEl.style.display = "";
-    //timerEl.innerText = "";
-    //clearInterval(timer); --- did not work
+    imageEl.style.display = "none";
+    imgMsgEl.innerText = "";
+    timerEl.innerText = "";
+    eachLetterEl.forEach(function(letter){
+        letter.style.background = "salmon";
+        letter.style.color = "black";
+
+    })
+    clearInterval(timerInterval);
     
 };
 
@@ -121,18 +132,26 @@ function setWordUp(){
        }
     secretWordEl.innerText = answerArr.join(" ");
     difBtnsEl.style.display = "none";
+    imageEl.style.display = "";
+    imageEl.src = "images/surfer1.jpg";
+    imgMsgEl.innerText = "Surf's Up Bro!";
+    chancesLeftEl.innerText = "Chances Left: " + chancesLeft;
 
-    // timeLeft = 60;
-    // // Maybe not here?? --- func espres or declar??
-    // let timer = setInterval(function() {
-    //     timerEl.textContent = timeLeft + ' seconds remaining.';
-    //     timeLeft -= 1;
-    //     if (timeLeft < 0) {
-    //         timerEl.textContent = "Time's Up Dudes!"
-    //     }
+    timeLeft = 60;
+    startTimer();
+    function startTimer (){
+    if (timerInterval){
+        clearInterval(timerInterval);
+    }
+    timerInterval = setInterval(function() {
+        timerEl.textContent = timeLeft + ' seconds remaining.';
+        timeLeft -= 1;
+        if (timeLeft < 0) {
+            timerEl.textContent = "Time's Up Dudes!"
+        }
     
-    // }, 1000)
-
+    }, 1000)
+    }
 };
 
 function checkLetter(letter){
@@ -143,6 +162,12 @@ function checkLetter(letter){
         for (let j=0; j<secretWord.length; j++){
             if (secretWord[j] === letter) {
                 answerArr[j] = letter;
+                imageEl.src = "images/surfer2.jpg";
+                imgMsgEl.innerText = "Dude, Rad Barrel!!"
+                letterClicked.style.backgroundColor = "green"
+                letterClicked.style.color = "white";
+
+
             }
         }
     } else {
@@ -150,6 +175,12 @@ function checkLetter(letter){
         wrongGuesses.push(letter);
         chancesLeftEl.innerText = chancesLeft;
         wrongGuessesEl.innerText = wrongGuesses.join(" ").toUpperCase();
+        imageEl.src = "images/surfer3.jpg";
+        imgMsgEl.innerText = "Wipeout!!"
+        chancesLeftEl.innerText = "Chances Left: " + chancesLeft;
+        letterClicked.style.backgroundColor = "black";
+        letterClicked.style.color = "salmon";
+
         // * Access and display correspondent img from imageLookup obj
     }
         checkWinner();
@@ -158,14 +189,18 @@ function checkLetter(letter){
 
 function checkWinner(){
     if (chancesLeft === 0) {
-        msgEl.innerText = "Wipeout!! You lose! Try Again";
+        msgEl.innerText = "Bro, You lose! Try Again. The word was " + secretWord.toUpperCase();
+        imageEl.src = "images/surfer4.jpg";
+
     }
     else if (answerArr.includes("?")) {
         return;
     }
     else {
         isWinner = true;
-        msgEl.innerText = "Congratulations, you WIN!!";
+        msgEl.innerText = "Congratulations!! Dude, you WIN!!";
+        imgMsgEl.innerText = "";
+        imageEl.src = "images/surfer5.jpg";
         //confetti.start(1500);
     }
 };

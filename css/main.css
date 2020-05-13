@@ -11,20 +11,24 @@ body {
 }
 h1 {
     font-size: 58px;
-    display: flex;
-    position: center;
+    text-align: center;
 }
 
 h2 {
     font-size: 64px;
+    text-align: center;
 }
 
+h3 {
+    font-size: 38px;
+    text-align: center;
+}
 .maincontent {
     margin: 18px 18px;
 }
 .db {
     background-color: salmon;
-    border: none;
+    border: 1px;
     color: black;
     padding: 15px 32px;
     text-align: center;
@@ -36,6 +40,8 @@ h2 {
 
 #secret-word {
     background-color: lightsalmon;
+    padding: 10px;
+    text-align: center;
 
 }
 
@@ -43,7 +49,11 @@ h2 {
     background-color: #f08080;
     font-size: 22px;
     margin: 10px;
-    ;
+    border: 1px;
+}
+.letters:hover {
+    background-color: darkgrey;
+    cursor: pointer;
 }
 
 #secret-word {
@@ -73,3 +83,8 @@ h2 {
         display: inline-block;
         font-size: 16px;
       }
+img {
+    height: 300px;
+    border: 10px solid salmon;
+    border-radius: 10px;
+}
