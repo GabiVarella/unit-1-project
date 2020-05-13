@@ -10,8 +10,10 @@ body {
     padding: 1em;
 }
 h1 {
-    font-size: 58px;
     text-align: center;
+    font-family: 'ABeeZee';
+    font-size: 64px;
+    background-color: rgb(170, 243, 180);    
 }
 
 h2 {
@@ -75,16 +77,54 @@ h3 {
 #resetbtn {
 
         background-color: salmon;
-        border: none;
+        border: 2px solid black;
+        margin: 20px;
+        padding: 10px;
         color: black;
         padding: 15px 32px;
         text-align: center;
         text-decoration: none;
-        display: inline-block;
         font-size: 16px;
+        width: 100%;
+        display: flexbox;
+        justify-items: center;
       }
 img {
     height: 300px;
     border: 10px solid salmon;
     border-radius: 10px;
 }
+footer{
+	text-transform: uppercase;
+	padding: 0 20px 0 20px;
+	background-color:rgb(170, 243, 180);
+	color: black;
+	font-size: 14px;
+	letter-spacing: .08em;
+	font-weight: 500;
+}
+
+.copyright{
+	float: left;
+    font-family: 'ABeeZee';
+}
+
+.message{
+	float: right;
+    font-family: 'Bangers';
+}
+
+.clearfix:after {
+visibility: hidden;
+display: block;
+content: " ";
+clear: both;
+height: 0;
+font-size: 0;
+}
+
+.name{
+	color: #F15B31;
+	font-weight: 700;
+}
+
