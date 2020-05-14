@@ -184,8 +184,6 @@ function checkLetter(letter){
         chancesLeftEl.innerText = "Chances Left: " + chancesLeft;
         letterClicked.style.backgroundColor = "black";
         letterClicked.style.color = "salmon";
-
-        // * Access and display correspondent img from imageLookup obj
     }
         checkWinner();
         render();
