@@ -7,36 +7,59 @@ body {
     justify-self: center;
     margin: auto;
     display: flexbox;
-    padding: 1em;
 }
 h1 {
     text-align: center;
-    font-family: 'ABeeZee';
+    font-family: 'Bangers';
     font-size: 64px;
-    background-color: rgb(170, 243, 180);    
+    background-color: rgb(170, 243, 180);
+    margin: 0;   
 }
 
 h2 {
     font-size: 64px;
     text-align: center;
+    margin: 0px;
+    font-family: 'Bangers';
+
 }
 
 h3 {
     font-size: 38px;
     text-align: center;
+    font-family: 'Allura';
+    margin: 10px;
+
+    }
+#img-div {
+    height: 300px;
+    margin: 10px;
 }
-.maincontent {
+#maincontent {
     margin: 18px 18px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-family: 'Allura';
+    font-size: 22px;
+
+}
+#difbuttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .db {
     background-color: salmon;
-    border: 1px;
+    border: 1px solid black;
+    border-radius: 10%;
     color: black;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    margin: 10px;
+    
 
 }
 
@@ -51,7 +74,7 @@ h3 {
     background-color: #f08080;
     font-size: 22px;
     margin: 10px;
-    border: 1px;
+    border: 1px solid black;
 }
 .letters:hover {
     background-color: darkgrey;
@@ -60,40 +83,67 @@ h3 {
 
 #secret-word {
     font-size: 46px;
+    font-family: 'Bangers';
     letter-spacing: 20px;
+    border: 2px solid black;
+    padding: 10px;
+
+
+}
+#wrong-guesses-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #wrong-guesses {
     font-size: 32px;
     letter-spacing: 20px;
+    font-family: 'ABeeZee';
+
 
 
 }
 #chances-left {
     font-size: 28px;
+    font-family: 'Allura';
 
+}
+
+#rst-btn-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #resetbtn {
 
-        background-color: salmon;
-        border: 2px solid black;
-        margin: 20px;
-        padding: 10px;
-        color: black;
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        font-size: 16px;
-        width: 100%;
-        display: flexbox;
-        justify-items: center;
+    background-color: salmon;
+    border: 2px solid black;
+    border-radius: 10%;
+    margin: 20px;
+    padding: 10px;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    justify-content: center;
       }
+
 img {
     height: 300px;
     border: 10px solid salmon;
     border-radius: 10px;
 }
+
+.animate__animate.animate__bounceInUp {
+    --animate-duration: 2s;
+    --animation-delay: 0.9s;
+}
+
 footer{
 	text-transform: uppercase;
 	padding: 0 20px 0 20px;

@@ -5,15 +5,15 @@ const easyWords = ["apple", "baloon", "circle", "beard", "sweet"];
 const medWords = ["garbage", "computer", "mattress"];
 const hardWords = ["javascript", "photograph", "neighborhood", "dashboard", "pharmacist"];
 
-//Fill in with image links later
-const imageLookup = {
-    "default" : "",
-    "first" : "",
-    "second" : "",
-    "third" : "",
-    "fourth" : "",
-    "fifth" : "",
-};
+// //Fill in with image links later
+// const imageLookup = {
+//     "default" : "",
+//     "first" : "",
+//     "second" : "",
+//     "third" : "",
+//     "fourth" : "",
+//     "fifth" : "",
+// };
 //================================================//
 /*==>==>==>==> APP STATE (VARIABLES) ==>==>==>==>*/
 let secretWord;
@@ -34,7 +34,6 @@ const medbtnEl = document.getElementById("mediumbtn");
 const hardbtnEl = document.getElementById("hardbtn");
 const rstBtnEl = document.getElementById("resetbtn");
 const letterBtnsElm = document.getElementById("letters-div");
-
 const eachLetterEl = document.querySelectorAll(".letters");
 const secretWordEl = document.getElementById("secret-word");
 const imageEl = document.getElementById("image");
@@ -44,6 +43,11 @@ const msgEl = document.getElementById("msg");
 const timerEl = document.getElementById("timer");
 const difBtnsEl = document.getElementById("difbuttons");
 const imgMsgEl = document.getElementById("img-message");
+const scoreEl = document.getElementById("score");
+// const wrapperEl = document.getElementById("chances-left-timer-wrapper");
+// const imgWrapperEl = document.getElementById("img-wrapper");
+
+//const animatedEl = document.getElementsByClassName(".animate__animated animate__bounceInUp");
 
 //Maybe something like:
 // const difBtnEls = {
@@ -112,23 +116,28 @@ function init(){
     msgEl.innerText = "";
     difBtnsEl.style.display = "";
     imageEl.style.display = "none";
-    imgMsgEl.innerText = "";
-    timerEl.innerText = "";
+    imgMsgEl.innerText = "Pick a Level of Gnarly 🏄🏾‍♂️";
+    timerEl.style.display = "none";
+    scoreEl.style.display = "none";
+    letterBtnsElm.style.display = "none";
+    rstBtnEl.style.display = "none";
     eachLetterEl.forEach(function(letter){
         letter.style.background = "salmon";
         letter.style.color = "black";
-
     })
+
+
+    //animatedEl.classList.add('animate__animated', 'animate__bounceOutLeft');
+    // imgWrapperEl.style.height = "100px";
+    // wrapperEl.style.height = "100px";
     clearInterval(timerInterval);
     
 };
 
-//var timer = 
-
 function setWordUp(){
     answerArr = secretWord.split(""); 
     for (var i = 0; i < answerArr.length; i++) {
-        answerArr[i] = "?";
+        answerArr[i] = "🤙🏾";
        }
     secretWordEl.innerText = answerArr.join(" ");
     difBtnsEl.style.display = "none";
@@ -136,6 +145,13 @@ function setWordUp(){
     imageEl.src = "images/surfer1.jpg";
     imgMsgEl.innerText = "Surf's Up Bro!";
     chancesLeftEl.innerText = "Chances Left: " + chancesLeft;
+    scoreEl.style.display = "";
+    letterBtnsElm.style.display = "";
+    timerEl.style.display = "";
+    rstBtnEl.style.display = "";
+
+    // wrapperEl.style.display = "";
+    // imgWrapperEl.style.display = "";
 
     timeLeft = 60;
     startTimer();
@@ -155,7 +171,7 @@ function setWordUp(){
 };
 
 function checkLetter(letter){
-    if (isWinner || chancesLeft === 0){
+    if (isWinner || chancesLeft === 0 || timeLeft < 1){
         return;
     };
     if (secretWord.includes(letter)) {
@@ -191,9 +207,9 @@ function checkWinner(){
     if (chancesLeft === 0) {
         msgEl.innerText = "Bro, You lose! Try Again. The word was " + secretWord.toUpperCase();
         imageEl.src = "images/surfer4.jpg";
-
+        clearInterval(timerInterval);
     }
-    else if (answerArr.includes("?")) {
+    else if (answerArr.includes("🤙🏾")) {
         return;
     }
     else {
@@ -201,6 +217,7 @@ function checkWinner(){
         msgEl.innerText = "Congratulations!! Dude, you WIN!!";
         imgMsgEl.innerText = "";
         imageEl.src = "images/surfer5.jpg";
+        clearInterval(timerInterval);
         //confetti.start(1500);
     }
 };

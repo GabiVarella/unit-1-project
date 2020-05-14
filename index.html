@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hang Loose Man</title>
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css">
     <link href='https://fonts.googleapis.com/css?family=ABeeZee' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Allura' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Bangers' rel='stylesheet'>
@@ -16,62 +16,73 @@
 
 <body>
 
-    <h1 id="title">Hang Loose Man</h1>
+    <h1 class="animate__animated animate__bounceInUp" id="title">Hang Loose Man</h1>
     <h2 id="msg"></h2>
-    <h3 id="img-message">Pick a Level of Gnarly 🤙🏾</h3>
+    <h3 id="img-message"></h3>
 
     <div id="difbuttons">
-        <button id="easybtn" class="db">Easy</button>
-        <button id="mediumbtn" class="db">Medium</button>
-        <button id="hardbtn" class="db">Hard</button>
+        <button id="easybtn" class="db">Rio de Janeiro</button>
+        <button id="mediumbtn" class="db">Teahupo'o</button>
+        <button id="hardbtn" class="db">Pipeline</button>
     </div>
 
-    <main class="maincontent">
-        <span id="score">SCORE GOES HERE</span>
-        <img src="" alt="Too gnarly bro!" id="image" height="300">
-        <span id="timer">TIME CLOCK HERE</span>
+    <main id="maincontent">
+
+        <span id="score">SCORE 34761851</span>
+
+        <div id="chances-left-timer-wrapper">
+            <span id="timer"></span>
+            <div id="chances-left"></div>
+        </div>
+        
+        <div id="img-wrapper">
+            <img src="" alt="Too gnarly bro!" id="image" height="300">
+        </div>
+        
+        <div id="letters-div">
+            <button id="btn-a" class="letters">A</button>
+            <button id="btn-b" class="letters">B</button>
+            <button id="btn-c" class="letters">C</button>
+            <button id="btn-d" class="letters">D</button>
+            <button id="btn-e" class="letters">E</button>
+            <button id="btn-f" class="letters">F</button>
+            <button id="btn-g" class="letters">G</button>
+            <button id="btn-h" class="letters">H</button>
+            <button id="btn-i" class="letters">I</button>
+            <button id="btn-j" class="letters">J</button>
+            <button id="btn-k" class="letters">K</button>
+            <button id="btn-l" class="letters">L</button>
+            <button id="btn-m" class="letters">M</button>
+            <button id="btn-n" class="letters">N</button>
+            <button id="btn-o" class="letters">O</button>
+            <button id="btn-p" class="letters">P</button>
+            <button id="btn-q" class="letters">Q</button>
+            <button id="btn-r" class="letters">R</button>
+            <button id="btn-s" class="letters">S</button>
+            <button id="btn-t" class="letters">T</button>
+            <button id="btn-u" class="letters">U</button>
+            <button id="btn-v" class="letters">V</button>
+            <button id="btn-w" class="letters">W</button>
+            <button id="btn-x" class="letters">X</button>
+            <button id="btn-y" class="letters">Y</button>
+            <button id="btn-z" class="letters">Z</button>
+        </div>
     </main>
 
-    <div id="chances-left"></div>
-
     <div id="secret-word"></div>
-
-    <div id="letters-div">
-        <button id="btn-a" class="letters">A</button>
-        <button id="btn-b" class="letters">B</button>
-        <button id="btn-c" class="letters">C</button>
-        <button id="btn-d" class="letters">D</button>
-        <button id="btn-e" class="letters">E</button>
-        <button id="btn-f" class="letters">F</button>
-        <button id="btn-g" class="letters">G</button>
-        <button id="btn-h" class="letters">H</button>
-        <button id="btn-i" class="letters">I</button>
-        <button id="btn-j" class="letters">J</button>
-        <button id="btn-k" class="letters">K</button>
-        <button id="btn-l" class="letters">L</button>
-        <button id="btn-m" class="letters">M</button>
-        <button id="btn-n" class="letters">N</button>
-        <button id="btn-o" class="letters">O</button>
-        <button id="btn-p" class="letters">P</button>
-        <button id="btn-q" class="letters">Q</button>
-        <button id="btn-r" class="letters">R</button>
-        <button id="btn-s" class="letters">S</button>
-        <button id="btn-t" class="letters">T</button>
-        <button id="btn-u" class="letters">U</button>
-        <button id="btn-v" class="letters">V</button>
-        <button id="btn-w" class="letters">W</button>
-        <button id="btn-x" class="letters">X</button>
-        <button id="btn-y" class="letters">Y</button>
-        <button id="btn-z" class="letters">Z</button>
+    
+    <div id="wrong-guesses-wrapper">
+        <div id="wrong-guesses"></div>
     </div>
 
-    <div id="wrong-guesses"></div>
-
-    <button id="resetbtn">RESET</button>
+    <div id="rst-btn-wrapper">
+        <button id="resetbtn">RESET</button>
+    </div>
 
     <footer class="clearfix">   
         <p class="copyright"> Copyright 2020 </p>
         <p class="message"> Created with &hearts; by <span class="name">Gabriel Varella</span> </p>
     </footer>
+
 </body>
 </html>
