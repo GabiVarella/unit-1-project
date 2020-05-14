@@ -17,6 +17,17 @@ let answerArr;
 let isWinner;
 let wrongGuesses;
 
+let music = new Audio("sounds/mainSong.mp3");
+let rightSound = new Audio('sounds/rightGuess.wav');
+let wrongSound = new Audio('sounds/crash.wav');
+let loseSound = new Audio('sounds/loseSound2.wav');
+let loseSound2 = new Audio('sounds/lose2.wav');
+let winSound = new Audio("sounds/winSound.wav");
+let winSound2 = new Audio("sounds/winSound2.wav");
+let readyGo = new Audio("sounds/readyGo.wav");
+
+
+
 //=====================================================//
 /*==>==>==>==> CACHED ELEMENTS REFERENCES ==>==>==>==>*/
 const titleEl = document.getElementById("title");
@@ -116,7 +127,12 @@ function init(){
         letter.style.color = "black";
     })
     clearInterval(timerInterval);
-    
+    music.pause();
+    music.currentTime = 0;
+    winSound.pause();
+    winSound.currentTime = 0;
+    winSound2.pause();
+    winSound2.currentTime = 0;
 };
 
 function setWordUp(){
@@ -124,6 +140,12 @@ function setWordUp(){
     for (var i = 0; i < answerArr.length; i++) {
         answerArr[i] = "🤙🏾";
        }
+    music.volume = .2;
+    music.play();
+    readyGo.volume = .2;
+    readyGo.play();
+    
+    timeLeft = 60;
     secretWordEl.innerText = answerArr.join(" ");
     difBtnsEl.style.display = "none";
     imageEl.style.display = "";
@@ -131,28 +153,23 @@ function setWordUp(){
     imgMsgEl.innerText = "Surf's Up Bro!";
     chancesLeftEl.innerText = "Chances Left: " + chancesLeft;
     scoreEl.style.display = "";
-    // scoreEl.innerText = "Your Score Is: " + score;
     letterBtnsElm.style.display = "";
     timerEl.style.display = "";
     rstBtnEl.style.display = "";
-
-    // wrapperEl.style.display = "";
-    // imgWrapperEl.style.display = "";
-    
-    timeLeft = 60;
     startTimer();
+
     function startTimer (){
-    if (timerInterval){
-        clearInterval(timerInterval);
-    }
-    timerInterval = setInterval(function() {
-        timerEl.textContent = timeLeft + ' seconds remaining.';
-        timeLeft -= 1;
-        if (timeLeft < 0) {
-            timerEl.textContent = "Time's Up Dudes!"
+        if (timerInterval){
+            clearInterval(timerInterval);
         }
-    
-    }, 1000)
+        timerInterval = setInterval(function() {
+            timerEl.textContent = timeLeft + ' seconds remaining.';
+            timeLeft -= 1;
+            if (timeLeft < 0) {
+                timerEl.textContent = "Time's Up Dudes!"
+            }
+        
+        }, 1000)
     }
 };
 
@@ -168,13 +185,17 @@ function checkLetter(letter){
                 imgMsgEl.innerText = "Dude, Rad Barrel!!"
                 letterClicked.style.backgroundColor = "green"
                 letterClicked.style.color = "white";
-                //score = (parseInt(answerArr.length) * 100) + parseInt(timeLeft) * 100) + (parseInt(chancesLeft) * 1000);    
-            //     // made score change here
+                score += 1175 + timeLeft * 100 + chancesLeft * 3379;
+                rightSound.volume = .2;
+                rightSound.play();
+               render();
              }
 
         }
         
     } else {
+        wrongSound.volume = .2;
+        wrongSound.play();
         chancesLeft -= 1;
         wrongGuesses.push(letter);
         chancesLeftEl.innerText = chancesLeft;
@@ -194,6 +215,13 @@ function checkWinner(){
         msgEl.innerText = "Bro, You lose! Try Again. The word was " + secretWord.toUpperCase();
         imageEl.src = "images/surfer4.jpg";
         clearInterval(timerInterval);
+        music.pause();
+        music.currentTime = 0;
+        loseSound.volume = .2;
+        loseSound.play();
+        loseSound2.volume = .2;
+        loseSound2.play();
+        
     }
     else if (answerArr.includes("🤙🏾")) {
         return;
@@ -203,6 +231,10 @@ function checkWinner(){
         msgEl.innerText = "Congratulations!! Dude, you WIN!!";
         imgMsgEl.innerText = "";
         imageEl.src = "images/surfer5.jpg";
+        winSound2.volume = .2;
+        winSound2.play();
+        winSound.volume = .2;
+        winSound.play();
         clearInterval(timerInterval);
         //confetti.start(1500);
     }
@@ -210,11 +242,9 @@ function checkWinner(){
 
 function render(){
     secretWordEl.innerText = answerArr.join(" ").toUpperCase();
-    //scoreEl.innerText = "Your Score Is: " + score;
-    // made score change here
+    scoreEl.innerText = "Your Score Is: " + score;
 
 
-    //titleEl.classList.add("animate__animated animate__backInUp");
 
     //if (winner === true) 
     //display selecWord() choice to secret-word HTML elem
