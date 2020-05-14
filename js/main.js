@@ -5,15 +5,6 @@ const easyWords = ["apple", "baloon", "circle", "beard", "sweet"];
 const medWords = ["garbage", "computer", "mattress"];
 const hardWords = ["javascript", "photograph", "neighborhood", "dashboard", "pharmacist"];
 
-// //Fill in with image links later
-// const imageLookup = {
-//     "default" : "",
-//     "first" : "",
-//     "second" : "",
-//     "third" : "",
-//     "fourth" : "",
-//     "fifth" : "",
-// };
 //================================================//
 /*==>==>==>==> APP STATE (VARIABLES) ==>==>==>==>*/
 let secretWord;
@@ -21,14 +12,14 @@ let score;
 let timeLeft;  
 let timerInterval;
 let chancesLeft;
-let letterClicked;  //Added this for making wrong guess btn a different color
+let letterClicked; 
 let answerArr;
 let isWinner;
 let wrongGuesses;
 
 //=====================================================//
 /*==>==>==>==> CACHED ELEMENTS REFERENCES ==>==>==>==>*/
-const titleEL = document.getElementById("title");
+const titleEl = document.getElementById("title");
 const easybtnEl = document.getElementById("easybtn");
 const medbtnEl = document.getElementById("mediumbtn");
 const hardbtnEl = document.getElementById("hardbtn");
@@ -46,8 +37,6 @@ const imgMsgEl = document.getElementById("img-message");
 const scoreEl = document.getElementById("score");
 // const wrapperEl = document.getElementById("chances-left-timer-wrapper");
 // const imgWrapperEl = document.getElementById("img-wrapper");
-
-//const animatedEl = document.getElementsByClassName(".animate__animated animate__bounceInUp");
 
 //Maybe something like:
 // const difBtnEls = {
@@ -102,6 +91,7 @@ letterBtnsElm.addEventListener("click", function(evt) {
 })
 
 rstBtnEl.addEventListener ("click", init);
+
 //====================================//    
 /*==>==>==>==> FUNCTIONS ==>==>==>==>*/
 init();
@@ -116,7 +106,7 @@ function init(){
     msgEl.innerText = "";
     difBtnsEl.style.display = "";
     imageEl.style.display = "none";
-    imgMsgEl.innerText = "Pick a Level of Gnarly 🏄🏾‍♂️";
+    imgMsgEl.innerText = "🏄🏾‍♂️ Pick a Level of Gnarly 🏄🏾‍♂️";
     timerEl.style.display = "none";
     scoreEl.style.display = "none";
     letterBtnsElm.style.display = "none";
@@ -125,11 +115,6 @@ function init(){
         letter.style.background = "salmon";
         letter.style.color = "black";
     })
-
-
-    //animatedEl.classList.add('animate__animated', 'animate__bounceOutLeft');
-    // imgWrapperEl.style.height = "100px";
-    // wrapperEl.style.height = "100px";
     clearInterval(timerInterval);
     
 };
@@ -146,13 +131,14 @@ function setWordUp(){
     imgMsgEl.innerText = "Surf's Up Bro!";
     chancesLeftEl.innerText = "Chances Left: " + chancesLeft;
     scoreEl.style.display = "";
+    // scoreEl.innerText = "Your Score Is: " + score;
     letterBtnsElm.style.display = "";
     timerEl.style.display = "";
     rstBtnEl.style.display = "";
 
     // wrapperEl.style.display = "";
     // imgWrapperEl.style.display = "";
-
+    
     timeLeft = 60;
     startTimer();
     function startTimer (){
@@ -182,15 +168,17 @@ function checkLetter(letter){
                 imgMsgEl.innerText = "Dude, Rad Barrel!!"
                 letterClicked.style.backgroundColor = "green"
                 letterClicked.style.color = "white";
+                //score = (parseInt(answerArr.length) * 100) + parseInt(timeLeft) * 100) + (parseInt(chancesLeft) * 1000);    
+            //     // made score change here
+             }
 
-
-            }
         }
+        
     } else {
         chancesLeft -= 1;
         wrongGuesses.push(letter);
         chancesLeftEl.innerText = chancesLeft;
-        wrongGuessesEl.innerText = wrongGuesses.join(" ").toUpperCase();
+        wrongGuessesEl.innerText = "Wrong Guesses: " + wrongGuesses.join(" ").toUpperCase();
         imageEl.src = "images/surfer3.jpg";
         imgMsgEl.innerText = "Wipeout!!"
         chancesLeftEl.innerText = "Chances Left: " + chancesLeft;
@@ -224,6 +212,12 @@ function checkWinner(){
 
 function render(){
     secretWordEl.innerText = answerArr.join(" ").toUpperCase();
+    //scoreEl.innerText = "Your Score Is: " + score;
+    // made score change here
+
+
+    //titleEl.classList.add("animate__animated animate__backInUp");
+
     //if (winner === true) 
     //display selecWord() choice to secret-word HTML elem
     //update the secret-word HTML elem
