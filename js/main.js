@@ -7,6 +7,7 @@ const hardWords = ["evanescent", "fortuitous", "phlegmatic", "predilection", "pr
 
 //================================================//
 /*==>==>==>==> APP STATE (VARIABLES) ==>==>==>==>*/
+
 let secretWord;
 let score; 
 let timeLeft;  
@@ -16,20 +17,18 @@ let letterClicked;
 let answerArr;
 let isWinner;
 let wrongGuesses;
-
 let music = new Audio("sounds/mainSong.mp3");
 let rightSound = new Audio('sounds/rightGuess.wav');
 let wrongSound = new Audio('sounds/crash.wav');
-let loseSound = new Audio('sounds/loseSound2.wav');
-let loseSound2 = new Audio('sounds/lose2.wav');
+let loseSound = new Audio('sounds/crowdboo.wav');
+let loseSound2 = new Audio('sounds/noscream.wav');
 let winSound = new Audio("sounds/winSound.wav");
 let winSound2 = new Audio("sounds/WinSound2.flac");
 let readyGo = new Audio("sounds/readyGo.wav");
 
-
-
 //=====================================================//
 /*==>==>==>==> CACHED ELEMENTS REFERENCES ==>==>==>==>*/
+
 const titleEl = document.getElementById("title");
 const easybtnEl = document.getElementById("easybtn");
 const medbtnEl = document.getElementById("mediumbtn");
@@ -46,30 +45,15 @@ const timerEl = document.getElementById("timer");
 const difBtnsEl = document.getElementById("difbuttons");
 const imgMsgEl = document.getElementById("img-message");
 const scoreEl = document.getElementById("score");
-// const wrapperEl = document.getElementById("chances-left-timer-wrapper");
-// const imgWrapperEl = document.getElementById("img-wrapper");
-
-//Maybe something like:
-// const difBtnEls = {
-//     "easy" : easybtnEl,
-//     "medium" : medbtnEl,
-//     "hard" : hardbtnEl
-
-// }
 
 //=========================================//
 /*==>==>==>==> EVENT LISTENERS ==>==>==>==>*/
 
-// Then here:
-// difBtnsEl.addEventListener("click", (evt) => {
-//     secretWord = difBtnsEl[evt.target.innerText.toLowerCase][Math.floor(Math.random() * difBtnsEl[evt.target.innerText.toLowerCase].length)];
-//     setWordUp();
-// });
-
 easybtnEl.addEventListener("click", () => {
     if (isWinner === false) {
         secretWord = easyWords[Math.floor(Math.random() * easyWords.length)];
-    setWordUp();
+        chancesLeft = 3;
+        setWordUp();
     }
    
 
@@ -78,7 +62,8 @@ easybtnEl.addEventListener("click", () => {
 medbtnEl.addEventListener("click", () => {
     if (isWinner === false) {
         secretWord = medWords[Math.floor(Math.random() * medWords.length)];
-    setWordUp();
+        chancesLeft = 4;
+        setWordUp();
 
     }
 });
@@ -86,7 +71,8 @@ medbtnEl.addEventListener("click", () => {
 hardbtnEl.addEventListener("click", () => {
     if (isWinner === false) {
         secretWord = hardWords[Math.floor(Math.random() * hardWords.length)];
-    setWordUp();
+        chancesLeft = 5;
+        setWordUp();
     }
 
 
@@ -105,10 +91,10 @@ rstBtnEl.addEventListener ("click", init);
 
 //====================================//    
 /*==>==>==>==> FUNCTIONS ==>==>==>==>*/
+
 init();
 function init(){
     score = 0;
-    chancesLeft = 3;
     wrongGuesses = [];
     answerArr = [];
     isWinner = false;
@@ -215,9 +201,9 @@ function checkWinner(){
     if (chancesLeft === 0 || timeLeft < 1) {
         music.pause();
         music.currentTime = 0;
-        loseSound.volume = .1;
+        loseSound.volume = .2;
         loseSound.play();
-        loseSound2.volume = .1;
+        loseSound2.volume = .2;
         loseSound2.play();
         msgEl.innerText = "Bro, You lose! Try Again. The word was " + secretWord.toUpperCase();
         imageEl.src = "images/surfer4.jpg";
@@ -236,23 +222,12 @@ function checkWinner(){
         winSound.volume = .1;
         winSound.play();
         clearInterval(timerInterval);
-        //confetti.start(1500);
     }
 };
 
 function render(){
     secretWordEl.innerText = answerArr.join(" ").toUpperCase();
     scoreEl.innerText = "Your Score Is: " + score;
-
-
-
-    //if (winner === true) 
-    //display selecWord() choice to secret-word HTML elem
-    //update the secret-word HTML elem
-    //update wrong-guesses HTML elem
-    //update chances-left HTML elem
-    //update score
-    //update time left
 };
 
 
