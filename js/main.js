@@ -1,9 +1,9 @@
 //====================================//
 /*==>==>==>==> CONSTANTS ==>==>==>==>*/
 
-const easyWords = ["apple", "baloon", "circle", "beard", "sweet"];
-const medWords = ["garbage", "computer", "mattress"];
-const hardWords = ["javascript", "photograph", "neighborhood", "dashboard", "pharmacist"];
+const easyWords = ["carp", "dirge", "dour", "extol", "inane", "inure", "knell", "maxim", "mores", "nadir", "pert", "pithy", "rife", "trite", "tread", "trash", "tased", "stead", "shear", "shard", "shade", "sherd", "sated", "rheas", "resat", "heart", "heard", "heaths", "hears", "hated", "hater", "haste", "haets", "earth", "derat", "drest", "drats", "darts", "tares", "ashed", "aster", "covet", "dear", "draw", "kind", "game", "grave", "hair", "half", "army", "agree", "angry", "away", "back", "block", "break", "cloudy", "county", "dance", "each", "enjoy", "false", "flour", "iron", "night", "obey", "prize", "quick", "radio", "sharp", "steam", "table", "teach", "trust", "think", "under", "voice", "week", "hurt", "beard", "sweet"];
+const medWords = ["carouse", "caucus", "cavort", "clamor", "cogent", "connive", "consign", "dearth", "debacle", "debunk", "despot", "duress", "edict", "elegy", "elicit", "emend", "emulate", "evince", "exhort", "exigent", "expiate", "extant", "fatuous", "hapless", "impinge", "impute", "laconic", "maudlin", "mawkish", "morass", "noisome", "noxious", "onerous", "panacea", "pariah", "paucity", "plaudit", "presage", "probity", "protean", "puerile", "quaint", "rescind", "stolid", "swarthy", "vestige", "zephyr", "around", "bashful", "brother", "cogent", "dearth", "debauch", "cleave", "conduit", "cavort", "consign", "calumny", "caucus", "abscond", "compare", "decide", "enough", "except", "general", "heaven", "kitchen", "market", "mistake", "outside", "petrol", "receive", "shadow", "twice", "useful", "weight", "garbage", "computer", "villain", "docile", "picture", "example", "mattress"];
+const hardWords = ["evanescent", "fortuitous", "phlegmatic", "predilection", "preponderance", "proclivity", "promulgate", "pugnacious", "recalcitrant", "requisition", "sanctimonious", "scurrilous", "serendipity", "solicitous", "trenchant", "truculent", "ubiquitous", "utilitarian", "vicissitude", "vituperate", "vociferous", "antithesis", "blandishment", "denigrate", "circumvent", "concomitant", "congruity", "corpulence", "contentious", "constituent", "conflagration", "commensurate", "cognizant", "circumscribe", "circumlocution", "capitulate", "camaraderie", "anathema", "anachronistic", "amorphous", "amenable", "ambivalent", "aggrandize", "adumbrate", "abstruse", "pronunciation", "handkerchief", "intelligence", "javascript", "magnanimous", "surveillance", "photograph", "successor", "reservoir", "miscellaneous", "neighborhood", "dashboard", "pharmacist"];
 
 //================================================//
 /*==>==>==>==> APP STATE (VARIABLES) ==>==>==>==>*/
@@ -23,7 +23,7 @@ let wrongSound = new Audio('sounds/crash.wav');
 let loseSound = new Audio('sounds/loseSound2.wav');
 let loseSound2 = new Audio('sounds/lose2.wav');
 let winSound = new Audio("sounds/winSound.wav");
-let winSound2 = new Audio("sounds/winSound2.wav");
+let winSound2 = new Audio("sounds/WinSound2.flac");
 let readyGo = new Audio("sounds/readyGo.wav");
 
 
@@ -110,6 +110,7 @@ function init(){
     score = 0;
     chancesLeft = 3;
     wrongGuesses = [];
+    answerArr = [];
     isWinner = false;
     wrongGuessesEl.innerText = "";
     chancesLeftEl.innerText = "";
@@ -133,6 +134,7 @@ function init(){
     winSound.currentTime = 0;
     winSound2.pause();
     winSound2.currentTime = 0;
+    render();
 };
 
 function setWordUp(){
@@ -140,11 +142,10 @@ function setWordUp(){
     for (var i = 0; i < answerArr.length; i++) {
         answerArr[i] = "🤙🏾";
        }
-    music.volume = .2;
+    music.volume = .1;
     music.play();
-    readyGo.volume = .2;
+    readyGo.volume = .1;
     readyGo.play();
-    
     timeLeft = 60;
     secretWordEl.innerText = answerArr.join(" ");
     difBtnsEl.style.display = "none";
@@ -211,17 +212,16 @@ function checkLetter(letter){
 };
 
 function checkWinner(){
-    if (chancesLeft === 0) {
-        msgEl.innerText = "Bro, You lose! Try Again. The word was " + secretWord.toUpperCase();
-        imageEl.src = "images/surfer4.jpg";
-        clearInterval(timerInterval);
+    if (chancesLeft === 0 || timeLeft < 1) {
         music.pause();
         music.currentTime = 0;
-        loseSound.volume = .2;
+        loseSound.volume = .1;
         loseSound.play();
-        loseSound2.volume = .2;
+        loseSound2.volume = .1;
         loseSound2.play();
-        
+        msgEl.innerText = "Bro, You lose! Try Again. The word was " + secretWord.toUpperCase();
+        imageEl.src = "images/surfer4.jpg";
+        clearInterval(timerInterval);    
     }
     else if (answerArr.includes("🤙🏾")) {
         return;
@@ -231,9 +231,9 @@ function checkWinner(){
         msgEl.innerText = "Congratulations!! Dude, you WIN!!";
         imgMsgEl.innerText = "";
         imageEl.src = "images/surfer5.jpg";
-        winSound2.volume = .2;
+        winSound2.volume = .1;
         winSound2.play();
-        winSound.volume = .2;
+        winSound.volume = .1;
         winSound.play();
         clearInterval(timerInterval);
         //confetti.start(1500);
